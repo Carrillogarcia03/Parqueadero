@@ -1,4 +1,9 @@
-/* style.css */
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
 table {
     width: 100%;
     border-collapse: collapse;
@@ -17,6 +22,9 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
     background-color: #AFEEEE; /* Otro tono de azul turquesa */
 }
+.boton-container {
+    text-align: center; /* Centrar elementos hijos */
+}
 .boton {
     background-color: #FF69B4; /* Palo de rosa */
     border: none;
@@ -28,4 +36,13 @@ tr:nth-child(odd) {
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+}
+h2{
+    text-align:center;
+}
+body{
+    background-image: url('C:\\Users\\Lucho\\OneDrive - Tecnologico de Antioquia Institucion Universitaria\\Documents\\Ingenieria\\Semestre III\\Construccion de Software II\\Taller 3\\Recursos\\cuerpo.jpg');
+    background-size:cover;
+    background-position:center;
+    background-repeat:repeat;
 }

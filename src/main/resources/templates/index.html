@@ -4,61 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parqueadero</title>
-    <style>
-        .flex{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #AEEEEE; /* Azul turquesa */
-        }
-        tr:nth-child(even) {
-            background-color: #00CED1; /* Azul turquesa */
-        }
-        tr:nth-child(odd) {
-            background-color: #AFEEEE; /* Otro tono de azul turquesa */
-        }
-        .boton-container {
-            text-align: center; /* Centrar elementos hijos */
-        }
-        .boton {
-            background-color: #FF69B4; /* Palo de rosa */
-            border: none;
-            color: white;
-            padding: 8px 16px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-        h2{
-            text-align:center;
-        }
-        body{
-            background-image: url('C:\\Users\\Lucho\\OneDrive - Tecnologico de Antioquia Institucion Universitaria\\Documents\\Ingenieria\\Semestre III\\Construccion de Software II\\Taller 3\\Recursos\\cuerpo.jpg');
-            background-size:cover;
-            background-position:center;
-            background-repeat:repeat;
-        }
-    </style>
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
     <h2>Parqueadero</h2>
     <table>
-        <  <tr>
+        <tr>
             <th>Placa</th>
             <th>Hora de Entrada</th>
             <th>Hora de Salida</th>
@@ -75,6 +26,13 @@
             <td th:text="${entry.totalPagar}"></td>
             <!-- Botón "Cobrar" para cada entrada -->
             <td>
+                <form th:action="@{/motos/cobrar}" method="post">
+                    <input type="hidden" name="placa" th:value="${entry.placa}">
+                    <input type="hidden" name="horasalida" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}">
+                    <button class="boton" type="submit">Cobrar</button>
+                </form>
+            </td>
+        </tr>
     </table>
 
     <h2>Agregar Entrada</h2>
@@ -91,31 +49,18 @@
             <option value="si">Sí</option>
             <option value="no">No</option>
         </select><br><br>
-        <!-- Contenedor para los botones -->
-        <div class="boton-container">
-            <!-- Botones de Editar y Eliminar -->
-            <form th:action="@{/motos/editar}" method="get">
-                <button class="boton" type="submit">Agregar Entrada</button>
-                <button class="boton" type="submit">Editar</button>
-                <button class="boton" type="submit">Eliminar</button>
-            
-            
-                
-            </form>
-            <td>
-                <form th:action="@{/motos/cobrar}" method="post">
-                    <input type="hidden" name="placa" th:value="${entry.placa}">
-                    <input type="hidden" name="horasalida" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}">
-                    <button class="boton" type="submit">Cobrar</button>
-                    
-                </form>
-            </td>
-        </div>
-        
-     
+        <!-- Botón para agregar entrada -->
+        <button class="boton" type="submit">Agregar Entrada</button>
     </form>
 
-   
-
+    <!-- Botones de Editar y Eliminar fuera del formulario -->
+    <div class="boton-container">
+        <form th:action="@{/motos/editar}" method="get">
+            <button class="boton" type="submit">Editar</button>
+        </form>
+        <form th:action="@{/motos/eliminar}" method="post">
+            <button class="boton" type="submit">Eliminar</button>
+        </form>
+    </div>
 </body>
 </html>
