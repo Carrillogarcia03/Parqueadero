@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parqueadero</title>
+    <style>
+        .flex{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #AEEEEE; /* Azul turquesa */
+        }
+        tr:nth-child(even) {
+            background-color: #00CED1; /* Azul turquesa */
+        }
+        tr:nth-child(odd) {
+            background-color: #AFEEEE; /* Otro tono de azul turquesa */
+        }
+        .boton-container {
+            text-align: center; /* Centrar elementos hijos */
+        }
+        .boton {
+            background-color: #FF69B4; /* Palo de rosa */
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        h2{
+            text-align:center;
+        }
+        body{
+            background-image: url('C:\\Users\\Lucho\\OneDrive - Tecnologico de Antioquia Institucion Universitaria\\Documents\\Ingenieria\\Semestre III\\Construccion de Software II\\Taller 3\\Recursos\\cuerpo.jpg');
+            background-size:cover;
+            background-position:center;
+            background-repeat:repeat;
+        }
+    </style>
+</head>
+<body>
+    <h2>Parqueadero</h2>
+    <table>
+        <  <tr>
+            <th>Placa</th>
+            <th>Hora de Entrada</th>
+            <th>Hora de Salida</th>
+            <th>Lleva Casco</th>
+            <th>Total a Pagar</th>
+            <th>Acciones</th>
+        </tr>
+        <!-- Filas de la tabla con datos dinámicos -->
+        <tr th:each="entry : ${entries}">
+            <td th:text="${entry.placa}"></td>
+            <td th:text="${entry.horaEntrada}"></td>
+            <td th:text="${entry.horaSalida}"></td>
+            <td th:text="${entry.llevaCasco ? 'Sí' : 'No'}"></td>
+            <td th:text="${entry.totalPagar}"></td>
+            <!-- Botón "Cobrar" para cada entrada -->
+            <td>
+    </table>
+
+    <h2>Agregar Entrada</h2>
+    <form th:action="@{/motos/}" method="post" class="flex">
+        <label for="placa">Placa:</label>
+        <input type="text" id="placa" name="placa" required><br><br>
+        <label for="horaentrada">Hora de Entrada:</label>
+        <input type="text" id="horaentrada" name="horaentrada" required><br><br>
+        <label for="horaentrada">Hora de Salida:</label>
+        <input type="text" id="horasalida" name="horasalida" required><br><br>
+        <!-- Agregar casilla para llevar casco -->
+        <label for="llevaCasco">¿Lleva Casco?</label>
+        <select id="llevaCasco" name="llevaCasco">
+            <option value="si">Sí</option>
+            <option value="no">No</option>
+        </select><br><br>
+        <!-- Contenedor para los botones -->
+        <div class="boton-container">
+            <!-- Botones de Editar y Eliminar -->
+            <form th:action="@{/motos/editar}" method="get">
+                <button class="boton" type="submit">Agregar Entrada</button>
+                <button class="boton" type="submit">Editar</button>
+                <button class="boton" type="submit">Eliminar</button>
+            
+            
+                
+            </form>
+            <td>
+                <form th:action="@{/motos/cobrar}" method="post">
+                    <input type="hidden" name="placa" th:value="${entry.placa}">
+                    <input type="hidden" name="horasalida" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}">
+                    <button class="boton" type="submit">Cobrar</button>
+                    
+                </form>
+            </td>
+        </div>
+        
+     
+    </form>
+
+   
+
+</body>
+</html>

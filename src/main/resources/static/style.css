@@ -1,0 +1,31 @@
+/* style.css */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #AEEEEE; /* Azul turquesa */
+}
+tr:nth-child(even) {
+    background-color: #00CED1; /* Azul turquesa */
+}
+tr:nth-child(odd) {
+    background-color: #AFEEEE; /* Otro tono de azul turquesa */
+}
+.boton {
+    background-color: #FF69B4; /* Palo de rosa */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
